@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Bombex.Models.Particular>
+
+@{
+    ViewBag.Title = "Particulars Listing";
+}
+
+<h2>Particulars Listing</h2>
+
+<p>
+    @Html.ActionLink("Add New Particulars", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Esppei No.")
+        </th>
+        <th>
+            @Html.Label("Water Meter")
+        </th>
+        <th>
+            @Html.Label("House Number")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.Label("Card Number")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Esipei)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WaterMeter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HouseNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resident.CardNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

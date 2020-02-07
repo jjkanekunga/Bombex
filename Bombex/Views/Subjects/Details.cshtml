@@ -1,0 +1,98 @@
+﻿@model Bombex.Models.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SysID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SysID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Designation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResidentIDVisitor1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResidentIDVisitor1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResidentIDVisitor2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResidentIDVisitor2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfFamilyMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfFamilyMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resident.CardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resident.CardNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

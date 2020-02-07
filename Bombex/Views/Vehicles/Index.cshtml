@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Bombex.Models.Vehicle>
+
+@{
+    ViewBag.Title = "Vehicle Listing";
+}
+
+<h2>Vehicle Listing</h2>
+
+<p>
+    @Html.ActionLink("Add New Vehicle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Safety Sticker")
+        </th>
+        <th>
+            @Html.Label("Registeration Sticker")
+        </th>
+        <th>
+            @Html.Label("Residential ID")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Colour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.Label("Engine Number")
+        </th>
+        <th>
+            @Html.Label("Body Type Number")
+        </th>
+        <th>
+            @Html.Label("Paint Number")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SafetySticker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterationSticker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResidentialID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Colour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngineNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BodyTypeNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaintNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VehicleNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VehicleNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VehicleNumber })
+        </td>
+    </tr>
+}
+
+</table>

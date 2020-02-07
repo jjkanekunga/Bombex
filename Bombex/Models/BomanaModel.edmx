@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bombex_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CardType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastDeactivated" Type="datetime" />
+          <Property Name="AccessType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTill" Type="datetime" />
+          <Property Name="TimeFrom" Type="datetime" />
+          <Property Name="TimeTill" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Family">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResidentID" Type="nvarchar" MaxLength="10" />
+          <Property Name="ResidentialIDPrimary" Type="nvarchar" MaxLength="10" />
+          <Property Name="RelationshipType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Movements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Movement" Type="text" />
+          <Property Name="Comments" Type="text" />
+        </EntityType>
+        <EntityType Name="Particulars">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Esipei" Type="nvarchar" MaxLength="50" />
+          <Property Name="WaterMeter" Type="nvarchar" MaxLength="50" />
+          <Property Name="HouseNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="ResidentID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Comments" Type="text" />
+        </EntityType>
+        <EntityType Name="Resident">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="Photo" Type="image" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="DOB" />
+          </Key>
+          <Property Name="SysID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="nvarchar" MaxLength="10" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comments" Type="text" />
+          <Property Name="ResidentID" Type="nvarchar" MaxLength="10" />
+          <Property Name="ResidentIDVisitor1" Type="nvarchar" MaxLength="10" />
+          <Property Name="ResidentIDVisitor2" Type="nvarchar" MaxLength="10" />
+          <Property Name="UnitNumber" Type="int" />
+          <Property Name="NumberOfFamilyMembers" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="VehicleNumber" />
+          </Key>
+          <Property Name="VehicleNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SafetySticker" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegisterationSticker" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResidentialID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Make" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Colour" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="EngineNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="BodyTypeNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaintNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Visitors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" />
+          <Property Name="VehicleNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumberOfPeople" Type="int" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="ResidentID" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Family_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Family" Type="Self.Family" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Family">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Cards">
+          <End Role="Cards" Type="Self.Cards" Multiplicity="0..1" />
+          <End Role="Movements" Type="Self.Movements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cards">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Movements">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Particulars_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Particulars" Type="Self.Particulars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Particulars">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resident_Cards">
+          <End Role="Cards" Type="Self.Cards" Multiplicity="0..1" />
+          <End Role="Resident" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cards">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitors_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Visitors" Type="Self.Visitors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitors_Visitors">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <End Role="Visitors" Type="Self.Visitors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="VehicleNumber" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="VehicleNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bombex_dbModelStoreContainer">
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Family" EntityType="Self.Family" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movements" EntityType="Self.Movements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Particulars" EntityType="Self.Particulars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resident" EntityType="Self.Resident" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visitors" EntityType="Self.Visitors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Family_Resident" Association="Self.FK_Family_Resident">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="Family" EntitySet="Family" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Cards" Association="Self.FK_Movements_Cards">
+            <End Role="Cards" EntitySet="Cards" />
+            <End Role="Movements" EntitySet="Movements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Particulars_Resident" Association="Self.FK_Particulars_Resident">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="Particulars" EntitySet="Particulars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resident_Cards" Association="Self.FK_Resident_Cards">
+            <End Role="Cards" EntitySet="Cards" />
+            <End Role="Resident" EntitySet="Resident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Resident" Association="Self.FK_Subject_Resident">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitors_Resident" Association="Self.FK_Visitors_Resident">
+            <End Role="Resident" EntitySet="Resident" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitors_Visitors" Association="Self.FK_Visitors_Visitors">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bombex_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Family">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResidentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialIDPrimary" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RelationshipType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK_Family_Resident" FromRole="Family" ToRole="Resident" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Movement1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Card" Relationship="bombex_dbModel.FK_Movements_Cards" FromRole="Movement" ToRole="Card" />
+        </EntityType>
+        <EntityType Name="Particular">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Esipei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterMeter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HouseNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK_Particulars_Resident" FromRole="Particulars" ToRole="Resident" />
+        </EntityType>
+        <EntityType Name="Resident">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Families" Relationship="Self.FK_Family_Resident" FromRole="Resident" ToRole="Family" />
+          <NavigationProperty Name="Particulars" Relationship="Self.FK_Particulars_Resident" FromRole="Resident" ToRole="Particulars" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subject_Resident" FromRole="Resident" ToRole="Subject" />
+          <NavigationProperty Name="Visitors" Relationship="Self.FK_Visitors_Resident" FromRole="Resident" ToRole="Visitors" />
+          <NavigationProperty Name="Card" Relationship="bombex_dbModel.FK_Resident_Cards" FromRole="Resident" ToRole="Card" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="DOB" />
+          </Key>
+          <Property Name="SysID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentIDVisitor1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentIDVisitor2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UnitNumber" Type="Int32" />
+          <Property Name="NumberOfFamilyMembers" Type="Int32" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK_Subject_Resident" FromRole="Subject" ToRole="Resident" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleNumber" />
+          </Key>
+          <Property Name="VehicleNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SafetySticker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterationSticker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="DateTime" Precision="3" />
+          <Property Name="EngineNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BodyTypeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaintNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Visitors" Relationship="Self.FK_Visitors_Visitors" FromRole="Vehicles" ToRole="Visitors" />
+        </EntityType>
+        <EntityType Name="Visitor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfPeople" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ResidentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK_Visitors_Resident" FromRole="Visitors" ToRole="Resident" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_Visitors_Visitors" FromRole="Visitors" ToRole="Vehicles" />
+        </EntityType>
+        <Association Name="FK_Family_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Family" Type="Self.Family" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Family">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Particulars_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Particulars" Type="Self.Particular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Particulars">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitors_Resident">
+          <End Role="Resident" Type="Self.Resident" Multiplicity="0..1" />
+          <End Role="Visitors" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resident">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitors_Visitors">
+          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="0..1" />
+          <End Role="Visitors" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="VehicleNumber" />
+            </Principal>
+            <Dependent Role="Visitors">
+              <PropertyRef Name="VehicleNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bombex_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Families" EntityType="Self.Family" />
+          <EntitySet Name="Movements" EntityType="Self.Movement" />
+          <EntitySet Name="Particulars" EntityType="Self.Particular" />
+          <EntitySet Name="Residents" EntityType="Self.Resident" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <EntitySet Name="Visitors" EntityType="Self.Visitor" />
+          <AssociationSet Name="FK_Family_Resident" Association="Self.FK_Family_Resident">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Family" EntitySet="Families" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Particulars_Resident" Association="Self.FK_Particulars_Resident">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Particulars" EntitySet="Particulars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Resident" Association="Self.FK_Subject_Resident">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitors_Resident" Association="Self.FK_Visitors_Resident">
+            <End Role="Resident" EntitySet="Residents" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitors_Visitors" Association="Self.FK_Visitors_Visitors">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Visitors" EntitySet="Visitors" />
+          </AssociationSet>
+          <EntitySet Name="Cards" EntityType="bombex_dbModel.Card" />
+          <AssociationSet Name="FK_Movements_Cards" Association="bombex_dbModel.FK_Movements_Cards">
+            <End Role="Card" EntitySet="Cards" />
+            <End Role="Movement" EntitySet="Movements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resident_Cards" Association="bombex_dbModel.FK_Resident_Cards">
+            <End Role="Card" EntitySet="Cards" />
+            <End Role="Resident" EntitySet="Residents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastDeactivated" Type="DateTime" Precision="3" />
+          <Property Name="AccessType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTill" Type="DateTime" Precision="3" />
+          <Property Name="TimeFrom" Type="DateTime" Precision="3" />
+          <Property Name="TimeTill" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Movements" Relationship="bombex_dbModel.FK_Movements_Cards" FromRole="Card" ToRole="Movement" />
+          <NavigationProperty Name="Residents" Relationship="bombex_dbModel.FK_Resident_Cards" FromRole="Card" ToRole="Resident" />
+        </EntityType>
+        <Association Name="FK_Movements_Cards">
+          <End Type="bombex_dbModel.Card" Role="Card" Multiplicity="0..1" />
+          <End Type="bombex_dbModel.Movement" Role="Movement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Movement">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resident_Cards">
+          <End Type="bombex_dbModel.Card" Role="Card" Multiplicity="0..1" />
+          <End Type="bombex_dbModel.Resident" Role="Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Resident">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bombex_dbModelStoreContainer" CdmEntityContainer="bombex_dbEntities">
+          <EntitySetMapping Name="Families">
+            <EntityTypeMapping TypeName="bombex_dbModel.Family">
+              <MappingFragment StoreEntitySet="Family">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="ResidentialIDPrimary" ColumnName="ResidentialIDPrimary" />
+                <ScalarProperty Name="RelationshipType" ColumnName="RelationshipType" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movements">
+            <EntityTypeMapping TypeName="bombex_dbModel.Movement">
+              <MappingFragment StoreEntitySet="Movements">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Movement1" ColumnName="Movement" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Particulars">
+            <EntityTypeMapping TypeName="bombex_dbModel.Particular">
+              <MappingFragment StoreEntitySet="Particulars">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Esipei" ColumnName="Esipei" />
+                <ScalarProperty Name="WaterMeter" ColumnName="WaterMeter" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residents">
+            <EntityTypeMapping TypeName="bombex_dbModel.Resident">
+              <MappingFragment StoreEntitySet="Resident">
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="bombex_dbModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="ResidentIDVisitor1" ColumnName="ResidentIDVisitor1" />
+                <ScalarProperty Name="ResidentIDVisitor2" ColumnName="ResidentIDVisitor2" />
+                <ScalarProperty Name="UnitNumber" ColumnName="UnitNumber" />
+                <ScalarProperty Name="NumberOfFamilyMembers" ColumnName="NumberOfFamilyMembers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="bombex_dbModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="SafetySticker" ColumnName="SafetySticker" />
+                <ScalarProperty Name="RegisterationSticker" ColumnName="RegisterationSticker" />
+                <ScalarProperty Name="ResidentialID" ColumnName="ResidentialID" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
+                <ScalarProperty Name="BodyTypeNumber" ColumnName="BodyTypeNumber" />
+                <ScalarProperty Name="PaintNumber" ColumnName="PaintNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visitors">
+            <EntityTypeMapping TypeName="bombex_dbModel.Visitor">
+              <MappingFragment StoreEntitySet="Visitors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="NumberOfPeople" ColumnName="NumberOfPeople" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="bombex_dbModel.Card">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="TimeTill" ColumnName="TimeTill" />
+                <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="AccessType" ColumnName="AccessType" />
+                <ScalarProperty Name="LastDeactivated" ColumnName="LastDeactivated" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

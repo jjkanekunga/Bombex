@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Bombex.Models.Resident>
+
+@{
+    ViewBag.Title = "Resident Listing";
+}
+
+<h2>Resident Listing</h2>
+
+<p>
+    @Html.ActionLink("Add New Resident", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Photo")
+        </th>
+        <th>
+            @Html.Label("Card Type")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card.CardType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResidentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResidentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResidentID })
+        </td>
+    </tr>
+}
+
+</table>

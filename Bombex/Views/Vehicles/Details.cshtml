@@ -1,0 +1,98 @@
+﻿@model Bombex.Models.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SafetySticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SafetySticker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterationSticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterationSticker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResidentialID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResidentialID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngineNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BodyTypeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BodyTypeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaintNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaintNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VehicleNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

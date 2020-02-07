@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Bombex.Models.Card>
+
+@{
+    ViewBag.Title = "Cards Listing";
+}
+
+<h2>Card Lisitng</h2>
+
+<p>
+    @Html.ActionLink("Add New Card", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Card Type")
+        </th>
+        <th>
+            @Html.Label("Date Created")
+        </th>
+        <th>
+            @Html.Label("Last Modified")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.Label("Last Deactivated")
+        </th>
+        <th>
+            @Html.Label("Access Type")
+        </th>
+        <th>
+            @Html.Label("Valid From")
+        </th>
+        <th>
+            @Html.Label("Valid Till")
+        </th>
+        <th>
+            @Html.Label("Time From")
+        </th>
+        <th>
+            @Html.Label("Time Till")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastDeactivated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidTill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeTill)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CardNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CardNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CardNumber })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}      
+    <div class="jumbotron" style="background-color:lightcyan">
+        <div class="row">
+            <div class="col-lg-2">
+                <img src="~/Images/pngpolicelogo.png">
+            </div>
+            <div class="col-lg-10">
+                <h1>POLICE IMS</h1>
+                <div>
+                </div>
+                <p class="lead">This web application is a comprehensive Police Information Management System.</p>
+                <p><a href="http://www.rpngc.gov.pg/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+   
+<div class="row">
+    <div class="col-md-4">
+        <h3>Data Entry</h3>
+        <p>
+            <a href="@Url.Action("Index", "Dashboard")" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-plus"></span> Add and Mantain Data
+            </a>            
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>Reports</h3>
+        <p>
+            <a href="#" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-stats"></span> Generate Police Reports
+            </a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>System Settings</h3>
+        <p>
+            <a href="#" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-cog"></span> System Configuration
+            </a>
+        </p>
+    </div>
+</div>

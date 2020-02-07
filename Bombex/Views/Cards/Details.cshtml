@@ -1,0 +1,98 @@
+﻿@model Bombex.Models.Card
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Card</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+             @Html.Label("Card Type")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardType)
+        </dd>
+
+        <dt>
+            @Html.Label("Date Created")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.Label("Last Modified")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.Label("Last Deactivated")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDeactivated)
+        </dd>
+
+        <dt>
+            @Html.Label("Access Type")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccessType)
+        </dd>
+
+        <dt>
+            @Html.Label("Valid From")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValidFrom)
+        </dd>
+
+        <dt>
+            @Html.Label("Valid Till")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValidTill)
+        </dd>
+
+        <dt>
+            @Html.Label("Time From")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeFrom)
+        </dd>
+
+        <dt>
+            @Html.Label("Time Till")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeTill)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CardNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

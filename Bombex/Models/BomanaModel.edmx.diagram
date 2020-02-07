@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa783cbabf754fa0b45ee7396222f1ef" Name="Diagram1">
+        <EntityTypeShape EntityType="bombex_dbModel.Family" Width="1.5" PointX="7.125" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Movement" Width="1.5" PointX="7.625" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Particular" Width="1.5" PointX="1.625" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Resident" Width="1.5" PointX="4.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Subject" Width="1.5" PointX="4.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Vehicle" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bombex_dbModel.Visitor" Width="1.5" PointX="5.75" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="bombex_dbModel.FK_Family_Resident" ManuallyRouted="false" />
+        <AssociationConnector Association="bombex_dbModel.FK_Particulars_Resident" ManuallyRouted="false" />
+        <AssociationConnector Association="bombex_dbModel.FK_Subject_Resident" ManuallyRouted="false" />
+        <AssociationConnector Association="bombex_dbModel.FK_Visitors_Resident" ManuallyRouted="false" />
+        <AssociationConnector Association="bombex_dbModel.FK_Visitors_Visitors" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bombex_dbModel.Card" Width="1.5" PointX="1.5" PointY="2.375" />
+        <AssociationConnector Association="bombex_dbModel.FK_Movements_Cards" />
+        <AssociationConnector Association="bombex_dbModel.FK_Resident_Cards" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

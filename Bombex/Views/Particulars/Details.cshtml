@@ -1,0 +1,58 @@
+﻿@model Bombex.Models.Particular
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Particular</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Esipei)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Esipei)
+        </dd>
+
+        <dt>
+            @Html.Label("Water Meter")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterMeter)
+        </dd>
+
+        <dt>
+            @Html.Label("House Number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.Label("Card Number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resident.CardNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
